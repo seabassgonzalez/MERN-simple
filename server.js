@@ -21,17 +21,13 @@
 // app.use (function error, request, response, next)
 	// if errors, respond with error status or 500
 
-// server
-// tell server to run on some port e.g. 8000 instantiate port variable
-// tell server to listen on that point
-	// log message to console to confirm listening on port
-
+// export app
 
 var fs = require('fs');
 var express = require('express');
 
 // import routes
-var indexRoutes = require('routes/index');
+var indexRoutes = require('./routes/index');
 
 // create app
 var app = express();
@@ -43,7 +39,7 @@ app.engine('html', function(path, options, callbacks){
 });
 
 // middleware
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '..client')));
 
 // routes
 app.use('/', indexRoutes);
@@ -53,8 +49,5 @@ app.use(function(err, req, res, next){
 	res.status(err.status || 500);
 });
 
-// serve app
-var port = 8000;
-app.listen(port, function(){
-	console.log('running at localhost:' + port);
-});
+// export app
+module.exports = app;
