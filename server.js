@@ -42,3 +42,8 @@ app.engine('html', function(path, options, callbacks){
 
 // middleware
 app.use(express.static(__dirname));
+
+// routes
+app.get('/', function(req, res){
+	res.sendFile(path.join(__dirname, 'index.html'));
+});
