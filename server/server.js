@@ -1,5 +1,6 @@
 // import necessary packages
-// path fs and express
+// fs and express
+// routes from server file indexRoutes 
 
 // create app
 // instantiate var app equal to express()
@@ -13,23 +14,20 @@
 // tell express to return static files at root folder where bundle.js exists
 // app.use express.static file path
 
-// routes
-// app.get at root '/' function(request response)
-	// return index.html file using res.sendFile (path.join current path, and index html file)
+// routes to route endpoint
+// app.use imported indexRoutes
  
 // error handler for other types of requests
 // app.use (function error, request, response, next)
 	// if errors, respond with error status or 500
 
-// server
-// tell server to run on some port e.g. 8000 instantiate port variable
-// tell server to listen on that point
-	// log message to console to confirm listening on port
+// export app
 
-
-var path = require('path');
 var fs = require('fs');
 var express = require('express');
+
+// import routes
+var indexRoutes = require('./routes/index');
 
 // create app
 var app = express();
@@ -41,20 +39,15 @@ app.engine('html', function(path, options, callbacks){
 });
 
 // middleware
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '../client')));
 
 // routes
-app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname, 'index.html'));
-});
+app.use('/', indexRoutes);
 
 // error handler
 app.use(function(err, req, res, next){
 	res.status(err.status || 500);
 });
 
-// serve app
-var port = 8000;
-app.listen(port, function(){
-	console.log('running at localhost:' + port);
-});
+// export app
+module.exports = app;
