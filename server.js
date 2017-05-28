@@ -47,3 +47,10 @@ app.use(express.static(__dirname));
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// error handler
+app.use(function(err, req, res, next){
+	res.status(err.status || 500);
+});
+
+
