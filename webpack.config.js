@@ -1,6 +1,5 @@
 // import packages
-// path to define directory paths
-// webpack 
+// path to define directory paths and webpack 
 
 // module.exports settings object
 	// entry set to app.js
