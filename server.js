@@ -25,3 +25,15 @@
 // tell server to run on some port e.g. 8000
 // tell server to listen on that point
 	// log message to console to confirm listening on port
+
+
+var path = require('path');
+var fs = require('fs');
+var express = require('express');
+
+// App
+
+app.set('view engine', 'html');
+app.engine('html', function(path, options, callbacks){
+	fs.readFile(path, 'utf-8', callback);
+});
