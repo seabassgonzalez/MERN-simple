@@ -40,5 +40,5 @@ app.engine('html', function(path, options, callbacks){
 	fs.readFile(path, 'utf-8', callback);
 });
 
-
-
+// middleware
+app.use(express.static(__dirname));
